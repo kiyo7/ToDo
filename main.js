@@ -1,5 +1,6 @@
     const remtask  = document.getElementById('remtask');
     const addBtn   = document.getElementsByClassName('add-btn');
+    const bulkDel  = document.getElementsByClassName('bulkDel');
     const todo     = document.getElementById('todo');
 
     let count = todo.childElementCount - 1;
@@ -16,10 +17,10 @@
         } else {
         //liの追加
         toDoL.innerHTML = addArea;
+        toDoL.className = 'trash';
         todo.appendChild(toDoL);
 
         //buttonの追加
-        toDoB.className = 'trash';
         toDoB.innerHTML = '完了';
         toDoL.appendChild(toDoB);
 
@@ -37,6 +38,17 @@
                 remtask.textContent = `残りのタスク${count}個`;
             }
         });
+
+        bulkDel[0].addEventListener('click', function() {//タスク一括削除
+            let children = document.getElementsByClassName('trash');
+            let len = children.length;
+            for (var i = 0; i < len; i++) {
+                todo.removeChild(children[0]);
+              }
+            count = 0;
+            remtask.textContent = `タスクはありません`;
+        })
+
     });
 
     // const taskUl   = document.getElementById('taskul');
